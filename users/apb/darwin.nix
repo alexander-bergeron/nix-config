@@ -61,7 +61,7 @@
       "/Applications/ProtonVPN.app"
       "/Applications/VMware Fusion.app"
       "${pkgs.keepassxc}/Applications/KeePassXC.app"
-      "${pkgs.alacritty}/Applications/Alacritty.app"
+      # "${pkgs.alacritty}/Applications/Alacritty.app"
       "/Applications/Ghostty.app"
       "/System/Applications/System Settings.app"
     ];
