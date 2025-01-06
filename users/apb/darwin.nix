@@ -30,7 +30,7 @@
       "ghostty"
       "logi-options+"
       "protonvpn"
-      "runelite"
+      # "runelite"
       "vmware-fusion"
     ];
 
