@@ -23,6 +23,7 @@ in {
   imports = [
     # pass in platform for setting configuration
     (import ./programs/alacritty.nix { inherit isWSL isDarwin isLinux; })
+    ./programs/ghostty.nix
     ./programs/git.nix
     ./programs/neovim.nix
     ./programs/starship.nix
@@ -42,6 +43,7 @@ in {
     pkgs.fabric-ai
     pkgs.go
     pkgs.go-migrate
+    # pkgs.ghostty
     pkgs.grpcurl
     pkgs.keepassxc
     pkgs.nodejs_22

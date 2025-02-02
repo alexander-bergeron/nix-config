@@ -27,7 +27,11 @@
     casks = [
       "displaylink"
       "firefox"
-      "ghostty"
+      # "ghostty"
+      {
+        name = "ghostty";
+        greedy = true;
+      }
       "logi-options+"
       "protonvpn"
       "vmware-fusion"
