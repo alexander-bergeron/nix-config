@@ -36,10 +36,10 @@ in {
   home.packages = [
     # Installed everywhere
     pkgs.buf
-    pkgs.colima
+    # pkgs.colima
     pkgs.dbeaver-bin
-    pkgs.docker
-    pkgs.docker-compose
+    # pkgs.docker
+    # pkgs.docker-compose
     pkgs.fabric-ai
     pkgs.go
     pkgs.go-migrate
@@ -49,6 +49,8 @@ in {
     pkgs.nodejs_22
     pkgs.obsidian
     pkgs.ollama
+    pkgs.podman
+    pkgs.podman-compose
     pkgs.protobuf
     pkgs.python3
     pkgs.pyright
