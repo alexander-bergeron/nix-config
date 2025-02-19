@@ -66,6 +66,7 @@ in {
     # pkgs.logseq
     pkgs.mkalias
     pkgs.utm
+    # pkgs.unifi
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # Linux but not wsl
     pkgs.firefox
