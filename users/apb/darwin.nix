@@ -34,7 +34,8 @@
       }
       "logi-options+"
       "protonvpn"
-      "vmware-fusion"
+      # "raspberry-pi-imager"
+      "vmware-fusion" 
     ];
 
     onActivation = {

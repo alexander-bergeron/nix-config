@@ -3,7 +3,7 @@
 {
   programs.alacritty = {
     # enable = !isWSL;
-    enable = false;
+    enable = isLinux;
 
     settings = {
       font.size = (if isDarwin then 11.0 else 13.0);
