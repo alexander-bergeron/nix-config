@@ -23,7 +23,7 @@ in {
   imports = [
     # pass in platform for setting configuration
     (import ./programs/alacritty.nix { inherit isWSL isDarwin isLinux; })
-    ./programs/ghostty.nix
+    (import ./programs/ghostty.nix { inherit isWSL isDarwin isLinux; })
     ./programs/git.nix
     ./programs/neovim.nix
     ./programs/starship.nix
