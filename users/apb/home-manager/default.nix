@@ -38,6 +38,7 @@ in {
     pkgs.buf
     # pkgs.colima
     pkgs.dbeaver-bin
+    pkgs.duckdb
     # pkgs.docker
     # pkgs.docker-compose
     pkgs.fabric-ai

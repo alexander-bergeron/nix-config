@@ -35,7 +35,8 @@
       "logi-options+"
       "protonvpn"
       # "raspberry-pi-imager"
-      "vmware-fusion" 
+      # "ubiquiti-unifi-controller"
+      "vmware-fusion"
     ];
 
     onActivation = {
