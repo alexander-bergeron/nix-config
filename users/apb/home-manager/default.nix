@@ -47,6 +47,7 @@ in {
     # pkgs.ghostty
     pkgs.grpcurl
     pkgs.keepassxc
+    pkgs.kubectl
     pkgs.nodejs_22
     pkgs.obsidian
     pkgs.ollama
@@ -61,6 +62,7 @@ in {
     pkgs.tinygo
     pkgs.tree
     pkgs.vim
+    # pkgs.wireshark
   ] ++ (lib.optionals isDarwin [
     # Darwin Only Programs
     pkgs.aerospace
