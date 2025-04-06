@@ -13,6 +13,9 @@
           done
         ) | pbcopy
       }
+
+      # .mov to .gif
+      gif() { ffmpeg -i $1 -pix_fmt rgb8 -r 10 -vf "scale=$2:-2" output.gif && gifsicle --optimize=3 output.gif -o output.gif }
     '';
 
     autocd = true;

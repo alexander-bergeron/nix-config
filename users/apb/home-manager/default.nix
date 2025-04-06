@@ -42,6 +42,8 @@ in {
     # pkgs.docker
     # pkgs.docker-compose
     pkgs.fabric-ai
+    pkgs.ffmpeg
+    pkgs.gifsicle
     pkgs.go
     pkgs.go-migrate
     # pkgs.ghostty
