@@ -14,7 +14,7 @@
         ) | pbcopy
       }
 
-      # .mov to .gif
+      # .mov to .gif - https://gist.github.com/imseeeb/6890df0ff1683f1fff961ce14b0a21b2
       gif() { ffmpeg -i $1 -pix_fmt rgb8 -r 10 -vf "scale=$2:-2" output.gif && gifsicle --optimize=3 output.gif -o output.gif }
     '';
 
