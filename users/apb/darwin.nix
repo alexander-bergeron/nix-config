@@ -25,6 +25,7 @@
     ];
 
     casks = [
+      # "chromedriver"
       "displaylink"
       "firefox"
       # "ghostty"
@@ -32,6 +33,7 @@
         name = "ghostty";
         greedy = true;
       }
+      # "google-chrome"
       "logi-options+"
       "protonvpn"
       # "raspberry-pi-imager"
