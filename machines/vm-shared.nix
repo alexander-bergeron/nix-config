@@ -121,7 +121,7 @@ in {
   # };
   # Install nerdfont for alacritty.
   fonts.packages = [
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+    pkgs.nerd-fonts.jetbrains-mono
   ];
 
 

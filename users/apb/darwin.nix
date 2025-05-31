@@ -84,4 +84,6 @@
     home = "/Users/apb";
     shell = pkgs.zsh;
   };
+
+  system.primaryUser = "apb";
 }

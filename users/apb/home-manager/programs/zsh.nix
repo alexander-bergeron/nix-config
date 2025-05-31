@@ -2,7 +2,7 @@
   programs.zsh = {
     enable = true;
 
-    initExtra = ''
+    initContent = ''
       # better tree clippy
       function cp_tree() {
         (
