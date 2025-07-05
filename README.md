@@ -86,6 +86,9 @@ If you're using this configuration with the user `apb` this process will prompt 
 
 ```bash
 darwin-rebuild switch --flake ~/.dotfiles/nix-config#macbook-pro-m1 --show-trace
+
+# post 25.05 update
+sudo NIXPKGS_ALLOW_BROKEN=1 darwin-rebuild switch --flake ~/workspaces/github.com/alexander-bergeron/nix-config#macbook-pro-m1 --show-trace --impure
 ```
 
 Once all the installs are complete and settings adjusted you'll want to restart your machine for some of the system settings to be applied.

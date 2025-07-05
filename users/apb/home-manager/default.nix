@@ -63,6 +63,7 @@ in {
     pkgs.sqlc
     pkgs.tinygo
     pkgs.tree
+    pkgs.uv
     pkgs.vim
     # pkgs.wireshark
   ] ++ (lib.optionals isDarwin [
