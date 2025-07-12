@@ -66,7 +66,7 @@
       "/Applications/Firefox.app"
       "${pkgs.obsidian}/Applications/Obsidian.app"
       "/Applications/ProtonVPN.app"
-      "/Applications/VMware Fusion.app"
+      # "/Applications/VMware Fusion.app"
       "${pkgs.keepassxc}/Applications/KeePassXC.app"
       # "${pkgs.alacritty}/Applications/Alacritty.app"
       "/Applications/Ghostty.app"
