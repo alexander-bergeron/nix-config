@@ -18,10 +18,10 @@
     enable = true;
 
     taps = [
-      "homebrew/bundle"
+      # "homebrew/bundle"
       "homebrew/cask"
       "homebrew/core"
-      "homebrew/services"
+      # "homebrew/services"
     ];
 
     casks = [
@@ -38,7 +38,7 @@
       "protonvpn"
       # "raspberry-pi-imager"
       # "ubiquiti-unifi-controller"
-      "vmware-fusion"
+      # "vmware-fusion"
     ];
 
     onActivation = {

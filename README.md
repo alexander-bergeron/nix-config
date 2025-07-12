@@ -74,18 +74,18 @@ Make sure to change `nixpkgs.hostPlatform` to `aarch64-darwin` if you are using 
 <summary>Using Existing Configuration</summary>
 <p></p>
 
-1. Clone down existing configuration or copy from a backup, in this example we have done this here `~/.dotfiles/nix-config`.
+1. Clone down existing configuration or copy from a backup, in this example we have done this here `~/nix-config`.
 
 2. Run the switch command for the new configuration, in this example `macbook-pro-m1`.
 
 ```bash
-nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/.dotfiles/nixos-config#macbook-pro-m1 --show-trace
+sudo nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/nix-config#macbook-pro-m1 --show-trace
 ```
 
 If you're using this configuration with the user `apb` this process will prompt you to change some settings for security and privacy to allow certain apps to have certain access. After running this you'll need to run an additional time after everything is initialized with the following command. Optionally use `--recreate-lock-file` to upgrade packages, you will get a warning `'--recreate-lock-file' is deprecated and will be removed in a future version; use 'nix flake update' instead.` so thats an option too.
 
 ```bash
-darwin-rebuild switch --flake ~/.dotfiles/nix-config#macbook-pro-m1 --show-trace
+sudo darwin-rebuild switch --flake ~/nix-config#macbook-pro-m1 --show-trace
 
 # post 25.05 update
 sudo NIXPKGS_ALLOW_BROKEN=1 darwin-rebuild switch --flake ~/workspaces/github.com/alexander-bergeron/nix-config#macbook-pro-m1 --show-trace --impure
