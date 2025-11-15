@@ -40,7 +40,16 @@
 
   outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs: let
     system.configurationRevision = self.rev or self.dirtyRev or null;
-  
+
+    # overlays = [
+    #   (final: prev: {
+    #     unstable = import inputs.nixpkgs-unstable {
+    #       system = final.system;
+    #       config.allowUnfree = true;
+    #     };
+    #   })
+    # ];
+
     # relative paths need to be tracked in git to be discoverable
     mkSystem = import ./lib/mksystem.nix {
       inherit nixpkgs inputs;

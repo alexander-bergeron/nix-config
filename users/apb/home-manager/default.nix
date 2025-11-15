@@ -1,6 +1,6 @@
 { isWSL, inputs, ... }:
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
 let
   isDarwin = pkgs.stdenv.isDarwin;
@@ -52,8 +52,10 @@ in {
     pkgs.kubectl
     pkgs.nodejs_22
     pkgs.obsidian
-    pkgs.ollama
-    pkgs.opencode
+    pkgs-unstable.ollama
+    pkgs-unstable.opencode
+    # pkgs.ollama
+    # pkgs.opencode
     pkgs.podman
     pkgs.podman-compose
     pkgs.protobuf

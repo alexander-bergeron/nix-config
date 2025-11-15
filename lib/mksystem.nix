@@ -14,6 +14,12 @@ let
   # True if this is a WSL system.
   isWSL = wsl;
 
+  # Create the unstable package set
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config.allowUnfree = true;
+  };
+
   # The config files for this system.
   machineConfig = ../machines/${name}.nix;
   userOSConfig = ../users/${user}/${if darwin then "darwin" else "nixos" }.nix;
@@ -40,6 +46,10 @@ in systemFunc rec {
       home-manager.users.${user} = import userHMConfig {
         isWSL = isWSL;
         inputs = inputs;
+      };
+      # Add pkgs-unstable to home-manager's extraSpecialArgs
+      home-manager.extraSpecialArgs = {
+        inherit pkgs-unstable;
       };
     }
 
