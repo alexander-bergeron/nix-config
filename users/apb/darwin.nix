@@ -35,6 +35,7 @@
       }
       # "google-chrome"
       "logi-options+"
+      "mactex"
       "protonvpn"
       # "raspberry-pi-imager"
       # "ubiquiti-unifi-controller"
@@ -62,7 +63,7 @@
     # NSGlobalDomain.AppleInterfaceStyle = "Dark";
     # NSGlobalDomain."com.apple.keyboard.fnState" = true;
     dock.persistent-apps = [
-      "/System/Applications/Launchpad.app"
+      "/System/Applications/Apps.app"
       "/Applications/Firefox.app"
       "${pkgs.obsidian}/Applications/Obsidian.app"
       "/Applications/ProtonVPN.app"

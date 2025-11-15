@@ -58,7 +58,7 @@ vm/bootstrap0-utm:
 			services.openssh.settings.PermitRootLogin = \"yes\";\n \
 			users.users.root.initialPassword = \"root\";\n \
 		' /mnt/etc/nixos/configuration.nix; \
-		nixos-install --no-root-passwd && reboot; \
+		nixos-install --no-root-passwd; \
 	"
 
 # Use to setup a fresh vm with VMWare Fusion with a nvme vdisk type

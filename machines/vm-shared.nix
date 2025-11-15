@@ -4,7 +4,7 @@ let
   # Turn this to true to use gnome instead of i3. This is a bit
   # of a hack, I just flip it on as I need to develop gnome stuff
   # for now.
-  linuxGnome = true;
+  linuxGnome = false;
 in {
   # Be careful updating this.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -138,6 +138,8 @@ in {
     niv
     rxvt-unicode-unwrapped
     xclip
+    xorg.xrandr
+    libxcvt
 
     # For hypervisors that support auto-resizing, this script forces it.
     # I've noticed not everyone listens to the udev events so this is a hack.
@@ -166,7 +168,7 @@ in {
 
   # Enable flatpak. I don't use any flatpak apps but I do sometimes
   # test them so I keep this enabled.
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   # Disable the firewall since we're in a VM and we want to make it
   # easy to visit stuff in here. We only use NAT networking anyways.

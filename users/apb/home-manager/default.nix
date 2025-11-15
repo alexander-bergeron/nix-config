@@ -53,6 +53,7 @@ in {
     pkgs.nodejs_22
     pkgs.obsidian
     pkgs.ollama
+    pkgs.opencode
     pkgs.podman
     pkgs.podman-compose
     pkgs.protobuf
