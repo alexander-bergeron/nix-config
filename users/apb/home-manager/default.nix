@@ -46,10 +46,12 @@ in {
     pkgs.gifsicle
     pkgs.go
     pkgs.go-migrate
+    # pkgs-unstable.ghostty
     # pkgs.ghostty
     pkgs.grpcurl
     pkgs.keepassxc
     pkgs.kubectl
+    pkgs.minikube
     pkgs.nodejs_22
     pkgs.obsidian
     pkgs-unstable.ollama
