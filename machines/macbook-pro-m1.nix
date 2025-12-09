@@ -76,6 +76,10 @@
   power.sleep.display = 10;
   power.sleep.computer = 10;
 
+  # Firewall
+  networking.applicationFirewall.enable = true;
+  networking.applicationFirewall.blockAllIncoming = true;
+
   # Turn off startup chime
   system.startup.chime = false;
 
