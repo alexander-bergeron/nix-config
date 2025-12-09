@@ -34,9 +34,15 @@
         greedy = true;
       }
       # "google-chrome"
+      "lm-studio"
       "logi-options+"
       "mactex"
-      "protonvpn"
+      # "opencode"
+      # "protonvpn"
+      {
+        name = "protonvpn";
+        greedy = true;
+      }
       # "raspberry-pi-imager"
       # "ubiquiti-unifi-controller"
       # "vmware-fusion"

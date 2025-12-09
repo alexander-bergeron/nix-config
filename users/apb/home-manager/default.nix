@@ -26,6 +26,7 @@ in {
     (import ./programs/ghostty.nix { inherit isWSL isDarwin isLinux; })
     ./programs/git.nix
     ./programs/neovim.nix
+    ./programs/opencode.nix
     ./programs/starship.nix
     ./programs/tmux.nix
     ./programs/zsh.nix
@@ -36,11 +37,12 @@ in {
   home.packages = [
     # Installed everywhere
     pkgs.buf
-    # pkgs.colima
+    pkgs.bun
+    pkgs.colima
     pkgs.dbeaver-bin
     pkgs.duckdb
-    # pkgs.docker
-    # pkgs.docker-compose
+    pkgs.docker
+    pkgs.docker-compose
     pkgs.fabric-ai
     pkgs.ffmpeg
     pkgs.gifsicle
@@ -50,7 +52,9 @@ in {
     # pkgs.ghostty
     pkgs.grpcurl
     pkgs.keepassxc
+    pkgs.kompose
     pkgs.kubectl
+    # pkgs-unstable.lmstudio
     pkgs.minikube
     pkgs.nodejs_22
     pkgs.obsidian
