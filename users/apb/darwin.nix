@@ -14,6 +14,14 @@
   #   pkgs.vim
   # ];
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      go-migrate-pg = prev.go-migrate.overrideAttrs (oldAttrs: {
+        tags = [ "postgres" ];
+      });
+    })
+  ];
+
   homebrew = {
     enable = true;
 

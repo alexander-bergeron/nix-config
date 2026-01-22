@@ -36,6 +36,7 @@ in {
   # paths it should manage.
   home.packages = [
     # Installed everywhere
+    pkgs.aider-chat
     pkgs.buf
     pkgs.bun
     pkgs.colima
@@ -43,17 +44,20 @@ in {
     pkgs.duckdb
     pkgs.docker
     pkgs.docker-compose
+    pkgs.dotnetCorePackages.sdk_8_0-bin
     pkgs.fabric-ai
     pkgs.ffmpeg
     pkgs.gifsicle
     pkgs.go
-    pkgs.go-migrate
+    # pkgs.go-migrate
+    pkgs.go-migrate-pg
     # pkgs-unstable.ghostty
     # pkgs.ghostty
     pkgs.grpcurl
     pkgs.keepassxc
     pkgs.kompose
     pkgs.kubectl
+    pkgs.libreoffice-bin
     # pkgs-unstable.lmstudio
     pkgs.minikube
     pkgs.nodejs_22
@@ -62,6 +66,7 @@ in {
     pkgs-unstable.opencode
     # pkgs.ollama
     # pkgs.opencode
+    pkgs.pgadmin4
     pkgs.podman
     pkgs.podman-compose
     pkgs.protobuf
@@ -75,6 +80,7 @@ in {
     pkgs.uv
     pkgs.vim
     # pkgs.wireshark
+    pkgs.zed-editor
   ] ++ (lib.optionals isDarwin [
     # Darwin Only Programs
     pkgs.aerospace
