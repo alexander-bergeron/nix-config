@@ -43,7 +43,7 @@
       }
       # "google-chrome"
       "lm-studio"
-      "logi-options+"
+      # "logi-options+"
       "mactex"
       # "opencode"
       # "protonvpn"
@@ -53,6 +53,7 @@
       }
       # "raspberry-pi-imager"
       # "ubiquiti-unifi-controller"
+      "virtualbox"
       # "vmware-fusion"
     ];
 

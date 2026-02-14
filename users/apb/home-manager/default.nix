@@ -50,14 +50,14 @@ in {
     pkgs.gifsicle
     pkgs.go
     # pkgs.go-migrate
-    pkgs.go-migrate-pg
+    # pkgs.go-migrate-pg
     # pkgs-unstable.ghostty
     # pkgs.ghostty
     pkgs.grpcurl
     pkgs.keepassxc
     pkgs.kompose
     pkgs.kubectl
-    pkgs.libreoffice-bin
+    # pkgs.libreoffice-bin
     # pkgs-unstable.lmstudio
     pkgs.minikube
     pkgs.nodejs_22
@@ -75,15 +75,18 @@ in {
     pkgs.ripgrep
     pkgs.rustup
     pkgs.sqlc
-    pkgs.tinygo
+    # pkgs.tinygo
     pkgs.tree
     pkgs.uv
     pkgs.vim
     # pkgs.wireshark
-    pkgs.zed-editor
+    # pkgs.zed-editor
+    pkgs-unstable.zed-editor
   ] ++ (lib.optionals isDarwin [
     # Darwin Only Programs
     pkgs.aerospace
+    pkgs.go-migrate-pg
+    pkgs.libreoffice-bin
     # pkgs.logseq
     pkgs.mkalias
     pkgs.utm
