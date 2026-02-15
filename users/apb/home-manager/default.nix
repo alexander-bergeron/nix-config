@@ -81,7 +81,7 @@ in {
     pkgs.vim
     # pkgs.wireshark
     # pkgs.zed-editor
-    pkgs-unstable.zed-editor
+    # pkgs-unstable.zed-editor
   ] ++ (lib.optionals isDarwin [
     # Darwin Only Programs
     pkgs.aerospace
