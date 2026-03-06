@@ -24,7 +24,7 @@ in {
   # Darwin uses a different config path outside of XDG
   home.file."Library/Application Support/com.mitchellh.ghostty/config" =
     lib.mkIf isDarwin {
-      text = "font-size = 1\n" + ghosttySettings;
+      text = "font-size = 12\n" + ghosttySettings;
     };
 
   # Linux config is handled by programs.ghostty above via xdg
