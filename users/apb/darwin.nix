@@ -45,6 +45,10 @@
       "lm-studio"
       # "logi-options+"
       "mactex"
+      # {
+      #   name = "ollama";
+      #   greedy = true;
+      # }
       # "opencode"
       # "protonvpn"
       {
