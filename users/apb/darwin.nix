@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, pkgs-unstable, ... }:
 
 {
   # environment.systemPackages = [
@@ -37,10 +37,10 @@
       "displaylink"
       "firefox"
       # "ghostty"
-      {
-        name = "ghostty";
-        greedy = true;
-      }
+      # {
+      #   name = "ghostty";
+      #   greedy = true;
+      # }
       # "google-chrome"
       "lm-studio"
       # "logi-options+"
@@ -90,7 +90,8 @@
       # "/Applications/VMware Fusion.app"
       "${pkgs.keepassxc}/Applications/KeePassXC.app"
       # "${pkgs.alacritty}/Applications/Alacritty.app"
-      "/Applications/Ghostty.app"
+      # "/Applications/Ghostty.app"
+      "${pkgs.ghostty-bin}/Applications/Ghostty.app"
       "/System/Applications/System Settings.app"
     ];
     # dock.show-recents = false;

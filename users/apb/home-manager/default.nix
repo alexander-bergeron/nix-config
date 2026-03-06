@@ -51,8 +51,7 @@ in {
     pkgs.go
     # pkgs.go-migrate
     # pkgs.go-migrate-pg
-    # pkgs-unstable.ghostty
-    # pkgs.ghostty
+    pkgs.ghostty-bin
     pkgs.grpcurl
     pkgs.keepassxc
     pkgs.kompose
