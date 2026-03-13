@@ -25,11 +25,6 @@
           "llama3.3" = {
             name = "Llama 3.3";
           };
-          "oc-qwen:latest" = {
-            name = "Qwen3 Coder 30B";
-            reasoning = true;
-            tools = true;
-          };
           "deepseek-coder:33b" = {
             name = "Deepseek-Coder 33B";
             tools = true;
@@ -38,6 +33,20 @@
             name = "Deepseek R1 32B";
             reasoning = true;
             tools = true;
+          };
+          "lfm2:latest" = {
+            name = "lfm2";
+            tools = true;
+          };
+          "qwen3-coder:30b" = {
+            name = "Qwen3 Coder 30B";
+            reasoning = true;
+            tool_call = true;
+          };
+          "qwen3.5:35b" = {
+            name = "Qwen3.5 35B";
+            reasoning = true;
+            tool_call = true;
           };
         };
       };

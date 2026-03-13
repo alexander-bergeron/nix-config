@@ -58,6 +58,7 @@ in {
     pkgs.kubectl
     # pkgs.libreoffice-bin
     # pkgs-unstable.lmstudio
+    pkgs.lua
     pkgs.minikube
     pkgs.nodejs_22
     pkgs.obsidian
