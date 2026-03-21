@@ -4,23 +4,21 @@
     ./vm-shared.nix
   ];
 
-  # Enable VirtualBox Guest Additions
-  virtualisation.virtualbox.guest.enable = true;
-  virtualisation.virtualbox.guest.draganddrop = true;
+  # UTM (QEMU-based hypervisor) configuration for aarch64
   
-  # For X11 integration (required for resolution changes)
-  services.xserver.videoDrivers = [ "virtualbox" ];
-
-  # # Interface is this on my M1
+  # Network interface configuration
+  # Uncomment and adjust the interface name based on your UTM VM setup
   # networking.interfaces.enp0s10.useDHCP = true;
-  #
-  # # Qemu
+
+  # SPICE daemon for display and mouse integration with UTM
+  # Uncomment if you need enhanced display/mouse support
   # services.spice-vdagentd.enable = true;
-  #
-  # # For now, we need this since hardware acceleration does not work.
+
+  # Software rendering fallback for aarch64 VMs
+  # Uncomment if you experience graphics/rendering issues
   # environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
-  # Lots of stuff that uses aarch64 that claims doesn't work, but actually works.
+  # aarch64 specific settings
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
 }

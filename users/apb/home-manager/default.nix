@@ -39,7 +39,7 @@ in {
     pkgs.aider-chat
     pkgs.buf
     pkgs.bun
-    pkgs.colima
+    pkgs-unstable.colima
     pkgs.dbeaver-bin
     pkgs.duckdb
     pkgs.docker

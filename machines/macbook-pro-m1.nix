@@ -18,6 +18,7 @@
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      download-buffer-size = 536870912
     '';
 
     # public binary cache that I use for all my derivations. You can keep

@@ -65,8 +65,13 @@
       system = "aarch64-linux";
       user   = "apb";
     };
-    # use with utm (not working currently)
+    # use with utm (qemu-based hypervisor)
     nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" rec {
+      system = "aarch64-linux";
+      user   = "apb";
+    };
+    # use with virtualbox on aarch64 (Apple Silicon)
+    nixosConfigurations.vm-aarch64-vb = mkSystem "vm-aarch64-vb" {
       system = "aarch64-linux";
       user   = "apb";
     };

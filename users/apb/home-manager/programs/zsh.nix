@@ -3,6 +3,9 @@
     enable = true;
 
     initContent = ''
+      
+      setopt GLOB_COMPLETE
+      
       # better tree clippy
       function cp_tree() {
         (
