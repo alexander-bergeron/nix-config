@@ -44,7 +44,7 @@
       # "google-chrome"
       "lm-studio"
       # "logi-options+"
-      "mactex"
+      # "mactex"
       # {
       #   name = "ollama";
       #   greedy = true;

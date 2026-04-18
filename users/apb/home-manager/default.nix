@@ -36,10 +36,11 @@ in {
   # paths it should manage.
   home.packages = [
     # Installed everywhere
-    pkgs.aider-chat
+    # pkgs.aider-chat
     pkgs.buf
     pkgs.bun
     pkgs-unstable.colima
+    # pkgs.claude-code
     pkgs.dbeaver-bin
     pkgs.duckdb
     pkgs.docker
@@ -75,6 +76,7 @@ in {
     pkgs.ripgrep
     pkgs.rustup
     pkgs.sqlc
+    pkgs.texliveSmall
     # pkgs.tinygo
     pkgs.tree
     pkgs.uv
@@ -88,7 +90,7 @@ in {
     pkgs.aerospace
     pkgs.go-migrate-pg
     pkgs.libreoffice-bin
-    # pkgs.logseq
+    pkgs.logseq
     pkgs.mkalias
     pkgs.utm
     # pkgs.unifi

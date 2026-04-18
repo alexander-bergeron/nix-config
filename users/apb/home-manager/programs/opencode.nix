@@ -48,6 +48,11 @@
             reasoning = true;
             tool_call = true;
           };
+          "gemma4:31b" = {
+            name = "Gemma4 31B";
+            reasoning = true;
+            tool_call = true;
+          };
         };
       };
       "LM Studio" = {
