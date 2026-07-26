@@ -59,7 +59,7 @@
       # "ubiquiti-unifi-controller"
       "virtualbox"
       # "vmware-fusion"
-      "zed"
+      # "zed"
     ];
 
     onActivation = {

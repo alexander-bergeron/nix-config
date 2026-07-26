@@ -48,6 +48,11 @@
             reasoning = true;
             tool_call = true;
           };
+          "qwen3.6:35b-a3b-coding-nvfp4" = {
+            name = "Qwen3.6 35B";
+            reasoning = true;
+            tool_call = true;
+          };
           "gemma4:31b" = {
             name = "Gemma4 31B";
             reasoning = true;

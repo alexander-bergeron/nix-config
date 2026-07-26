@@ -25,7 +25,7 @@ in {
     (import ./programs/alacritty.nix { inherit isWSL isDarwin isLinux; })
     (import ./programs/ghostty.nix { inherit isWSL isDarwin isLinux; })
     ./programs/git.nix
-    ./programs/neovim.nix
+    # ./programs/neovim.nix
     ./programs/opencode.nix
     ./programs/starship.nix
     ./programs/tmux.nix
@@ -39,7 +39,8 @@ in {
     # pkgs.aider-chat
     pkgs.buf
     pkgs.bun
-    pkgs-unstable.colima
+    pkgs.colima
+    # pkgs-unstable.colima
     # pkgs.claude-code
     pkgs.dbeaver-bin
     pkgs.duckdb
@@ -62,11 +63,12 @@ in {
     pkgs.lua
     pkgs.minikube
     pkgs.nodejs_22
+    pkgs-unstable.neovim
     pkgs.obsidian
-    pkgs-unstable.ollama
-    pkgs-unstable.opencode
     # pkgs.ollama
+    # pkgs-unstable.ollama
     # pkgs.opencode
+    pkgs-unstable.opencode
     pkgs.pgadmin4
     pkgs.podman
     pkgs.podman-compose
@@ -79,6 +81,7 @@ in {
     pkgs.texliveSmall
     # pkgs.tinygo
     pkgs.tree
+    pkgs.tree-sitter
     pkgs.uv
     pkgs.vim
     pkgs.yt-dlp
@@ -90,7 +93,7 @@ in {
     pkgs.aerospace
     pkgs.go-migrate-pg
     pkgs.libreoffice-bin
-    pkgs.logseq
+    # pkgs.logseq
     pkgs.mkalias
     pkgs.utm
     # pkgs.unifi

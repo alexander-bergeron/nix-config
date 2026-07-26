@@ -7,6 +7,8 @@
   # nix.useDaemon = true;
   ids.gids.nixbld = 350;
 
+  services.openssh.enable = false;
+
   # Keep in async with vm-shared.nix. (todo: pull this out into a file)
   nix = {
     # We use the determinate-nix installer which manages Nix for us,
