@@ -17,6 +17,14 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 # We need to do some OS switching below.
 UNAME := $(uname)
 
+# Hypervisor-specific device paths for bootstrap:
+# VMware Fusion (aarch64):        /dev/nvme0n1 (use vm/bootstrap0)
+# VMware Fusion (Intel):          /dev/sda (use vm/bootstrap0)
+# VirtualBox (SATA/AHCI):         /dev/sda (use vm/bootstrap0-vb-sata)
+# VirtualBox (NVMe):              /dev/nvme0n1 (use vm/bootstrap0-vb-nvme)
+# Parallels (qemu):               Auto-detected
+# UTM (qemu):                     Typically /dev/vda (use vm/bootstrap0-utm)
+
 switch:
 ifeq ($(UNAME), Darwin)
 	nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXNAME}.system"
@@ -58,8 +66,65 @@ vm/bootstrap0-utm:
 			services.openssh.settings.PermitRootLogin = \"yes\";\n \
 			users.users.root.initialPassword = \"root\";\n \
 		' /mnt/etc/nixos/configuration.nix; \
+		nixos-install --no-root-passwd; \
+	"
+
+# Use to setup a fresh VM with VirtualBox (SATA/AHCI storage controller)
+vm/bootstrap0-vb-sata:
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) " \
+		parted /dev/sda -- mklabel gpt; \
+		parted /dev/sda -- mkpart primary 512MB -8GB; \
+		parted /dev/sda -- mkpart primary linux-swap -8GB 100\%; \
+		parted /dev/sda -- mkpart ESP fat32 1MB 512MB; \
+		parted /dev/sda -- set 3 esp on; \
+		sleep 1; \
+		mkfs.ext4 -L nixos /dev/sda1; \
+		mkswap -L swap /dev/sda2; \
+		mkfs.fat -F 32 -n boot /dev/sda3; \
+		sleep 1; \
+		mount /dev/disk/by-label/nixos /mnt; \
+		mkdir -p /mnt/boot; \
+		mount /dev/disk/by-label/boot /mnt/boot; \
+		nixos-generate-config --root /mnt; \
+		sed --in-place '/system\.stateVersion = .*/a \
+			nix.package = pkgs.nixVersions.latest;\n \
+			nix.extraOptions = \"experimental-features = nix-command flakes\";\n \
+  			services.openssh.enable = true;\n \
+			services.openssh.settings.PasswordAuthentication = true;\n \
+			services.openssh.settings.PermitRootLogin = \"yes\";\n \
+			users.users.root.initialPassword = \"root\";\n \
+		' /mnt/etc/nixos/configuration.nix; \
 		nixos-install --no-root-passwd && reboot; \
 	"
+
+# Use to setup a fresh VM with VirtualBox (NVMe storage controller)
+vm/bootstrap0-vb-nvme:
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) " \
+		parted /dev/nvme0n1 -- mklabel gpt; \
+		parted /dev/nvme0n1 -- mkpart primary 512MB -8GB; \
+		parted /dev/nvme0n1 -- mkpart primary linux-swap -8GB 100\%; \
+		parted /dev/nvme0n1 -- mkpart ESP fat32 1MB 512MB; \
+		parted /dev/nvme0n1 -- set 3 esp on; \
+		sleep 1; \
+		mkfs.ext4 -L nixos /dev/nvme0n1p1; \
+		mkswap -L swap /dev/nvme0n1p2; \
+		mkfs.fat -F 32 -n boot /dev/nvme0n1p3; \
+		sleep 1; \
+		mount /dev/disk/by-label/nixos /mnt; \
+		mkdir -p /mnt/boot; \
+		mount /dev/disk/by-label/boot /mnt/boot; \
+		nixos-generate-config --root /mnt; \
+		sed --in-place '/system\.stateVersion = .*/a \
+			nix.package = pkgs.nixVersions.latest;\n \
+			nix.extraOptions = \"experimental-features = nix-command flakes\";\n \
+  			services.openssh.enable = true;\n \
+			services.openssh.settings.PasswordAuthentication = true;\n \
+			services.openssh.settings.PermitRootLogin = \"yes\";\n \
+			users.users.root.initialPassword = \"root\";\n \
+		' /mnt/etc/nixos/configuration.nix; \
+		nixos-install --no-root-passwd && reboot; \
+	"
+
 
 # Use to setup a fresh vm with VMWare Fusion with a nvme vdisk type
 vm/bootstrap0:

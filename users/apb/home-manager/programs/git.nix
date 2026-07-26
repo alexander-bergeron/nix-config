@@ -13,10 +13,10 @@
 
   programs.git = {
     enable = true;
-    userName = "Alexander Bergeron";
-    userEmail = "alexander-bergeron@github.com";
+    settings = {
+      user.name = "Alexander Bergeron";
+      user.email = "alexander-bergeron@github.com";
 
-    extraConfig = {
       # core.editor = "/usr/bin/vi";
       core.editor = "${pkgs.vim}/bin/vim";
 
@@ -24,4 +24,18 @@
       pager.branch = "false";
     };
   };
+
+  # programs.git = {
+  #   enable = true;
+  #   userName = "Alexander Bergeron";
+  #   userEmail = "alexander-bergeron@github.com";
+  #
+  #   extraConfig = {
+  #     # core.editor = "/usr/bin/vi";
+  #     core.editor = "${pkgs.vim}/bin/vim";
+  #
+  #     push.default = "simple";
+  #     pager.branch = "false";
+  #   };
+  # };
 }

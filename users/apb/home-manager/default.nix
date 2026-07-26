@@ -1,6 +1,6 @@
 { isWSL, inputs, ... }:
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
 let
   isDarwin = pkgs.stdenv.isDarwin;
@@ -25,7 +25,8 @@ in {
     (import ./programs/alacritty.nix { inherit isWSL isDarwin isLinux; })
     (import ./programs/ghostty.nix { inherit isWSL isDarwin isLinux; })
     ./programs/git.nix
-    ./programs/neovim.nix
+    # ./programs/neovim.nix
+    ./programs/opencode.nix
     ./programs/starship.nix
     ./programs/tmux.nix
     ./programs/zsh.nix
@@ -35,24 +36,40 @@ in {
   # paths it should manage.
   home.packages = [
     # Installed everywhere
+    # pkgs.aider-chat
     pkgs.buf
-    # pkgs.colima
+    pkgs.bun
+    pkgs.colima
+    # pkgs-unstable.colima
+    # pkgs.claude-code
     pkgs.dbeaver-bin
     pkgs.duckdb
-    # pkgs.docker
-    # pkgs.docker-compose
+    pkgs.docker
+    pkgs.docker-compose
+    pkgs.dotnetCorePackages.sdk_8_0-bin
     pkgs.fabric-ai
     pkgs.ffmpeg
     pkgs.gifsicle
     pkgs.go
-    pkgs.go-migrate
-    # pkgs.ghostty
+    # pkgs.go-migrate
+    # pkgs.go-migrate-pg
+    pkgs.ghostty-bin
     pkgs.grpcurl
     pkgs.keepassxc
+    pkgs.kompose
     pkgs.kubectl
+    # pkgs.libreoffice-bin
+    # pkgs-unstable.lmstudio
+    pkgs.lua
+    pkgs.minikube
     pkgs.nodejs_22
+    pkgs-unstable.neovim
     pkgs.obsidian
-    pkgs.ollama
+    # pkgs.ollama
+    # pkgs-unstable.ollama
+    # pkgs.opencode
+    pkgs-unstable.opencode
+    pkgs.pgadmin4
     pkgs.podman
     pkgs.podman-compose
     pkgs.protobuf
@@ -61,13 +78,21 @@ in {
     pkgs.ripgrep
     pkgs.rustup
     pkgs.sqlc
-    pkgs.tinygo
+    pkgs.texliveSmall
+    # pkgs.tinygo
     pkgs.tree
+    pkgs.tree-sitter
+    pkgs.uv
     pkgs.vim
-    # pkgs.wireshark
+    pkgs.yt-dlp
+    pkgs.wireshark
+    # pkgs.zed-editor
+    # pkgs-unstable.zed-editor
   ] ++ (lib.optionals isDarwin [
     # Darwin Only Programs
     pkgs.aerospace
+    pkgs.go-migrate-pg
+    pkgs.libreoffice-bin
     # pkgs.logseq
     pkgs.mkalias
     pkgs.utm

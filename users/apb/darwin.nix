@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, pkgs-unstable, ... }:
 
 {
   # environment.systemPackages = [
@@ -14,14 +14,22 @@
   #   pkgs.vim
   # ];
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      go-migrate-pg = prev.go-migrate.overrideAttrs (oldAttrs: {
+        tags = [ "postgres" ];
+      });
+    })
+  ];
+
   homebrew = {
     enable = true;
 
     taps = [
-      "homebrew/bundle"
+      # "homebrew/bundle"
       "homebrew/cask"
       "homebrew/core"
-      "homebrew/services"
+      # "homebrew/services"
     ];
 
     casks = [
@@ -29,16 +37,29 @@
       "displaylink"
       "firefox"
       # "ghostty"
+      # {
+      #   name = "ghostty";
+      #   greedy = true;
+      # }
+      # "google-chrome"
+      "lm-studio"
+      # "logi-options+"
+      # "mactex"
+      # {
+      #   name = "ollama";
+      #   greedy = true;
+      # }
+      # "opencode"
+      # "protonvpn"
       {
-        name = "ghostty";
+        name = "protonvpn";
         greedy = true;
       }
-      # "google-chrome"
-      "logi-options+"
-      "protonvpn"
       # "raspberry-pi-imager"
       # "ubiquiti-unifi-controller"
-      "vmware-fusion"
+      "virtualbox"
+      # "vmware-fusion"
+      # "zed"
     ];
 
     onActivation = {
@@ -62,14 +83,15 @@
     # NSGlobalDomain.AppleInterfaceStyle = "Dark";
     # NSGlobalDomain."com.apple.keyboard.fnState" = true;
     dock.persistent-apps = [
-      "/System/Applications/Launchpad.app"
+      "/System/Applications/Apps.app"
       "/Applications/Firefox.app"
       "${pkgs.obsidian}/Applications/Obsidian.app"
       "/Applications/ProtonVPN.app"
-      "/Applications/VMware Fusion.app"
+      # "/Applications/VMware Fusion.app"
       "${pkgs.keepassxc}/Applications/KeePassXC.app"
       # "${pkgs.alacritty}/Applications/Alacritty.app"
-      "/Applications/Ghostty.app"
+      # "/Applications/Ghostty.app"
+      "${pkgs.ghostty-bin}/Applications/Ghostty.app"
       "/System/Applications/System Settings.app"
     ];
     # dock.show-recents = false;
@@ -84,4 +106,6 @@
     home = "/Users/apb";
     shell = pkgs.zsh;
   };
+
+  system.primaryUser = "apb";
 }

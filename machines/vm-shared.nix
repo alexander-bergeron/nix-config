@@ -4,7 +4,7 @@ let
   # Turn this to true to use gnome instead of i3. This is a bit
   # of a hack, I just flip it on as I need to develop gnome stuff
   # for now.
-  linuxGnome = true;
+  linuxGnome = false;
 in {
   # Be careful updating this.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -15,6 +15,7 @@ in {
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      download-buffer-size = 536870912
     '';
 
     # public binary cache that I use for all my derivations. You can keep
@@ -64,42 +65,46 @@ in {
       fcitx5.addons = with pkgs; [
         fcitx5-mozc
         fcitx5-gtk
-        fcitx5-chinese-addons
+        qt6Packages.fcitx5-chinese-addons
       ];
     };
   };
 
   # setup windowing environment
-  services.xserver = if linuxGnome then {
-    enable = true;
-    xkb.layout = "us";
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
-  } else {
-    enable = true;
-    xkb.layout = "us";
-    dpi = 220;
+  # see https://github.com/lilyinstarlight/nixos-cosmic/blob/main/flake.nix
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
-    desktopManager = {
-      xterm.enable = false;
-      wallpaper.mode = "fill";
-    };
-
-    displayManager = {
-      defaultSession = "none+i3";
-      lightdm.enable = true;
-
-      # AARCH64: For now, on Apple Silicon, we must manually set the
-      # display resolution. This is a known issue with VMware Fusion.
-      sessionCommands = ''
-        ${pkgs.xorg.xset}/bin/xset r rate 200 40
-      '';
-    };
-
-    windowManager = {
-      i3.enable = true;
-    };
-  };
+  # services.xserver = if linuxGnome then {
+  #   enable = true;
+  #   xkb.layout = "us";
+  #   desktopManager.gnome.enable = true;
+  #   displayManager.gdm.enable = true;
+  # } else {
+  #   enable = true;
+  #   xkb.layout = "us";
+  #   dpi = 220;
+  #
+  #   desktopManager = {
+  #     xterm.enable = false;
+  #     wallpaper.mode = "fill";
+  #   };
+  #
+  #   displayManager = {
+  #     defaultSession = "none+i3";
+  #     lightdm.enable = true;
+  #
+  #     # AARCH64: For now, on Apple Silicon, we must manually set the
+  #     # display resolution. This is a known issue with VMware Fusion.
+  #     sessionCommands = ''
+  #       ${pkgs.xorg.xset}/bin/xset r rate 200 40
+  #     '';
+  #   };
+  #
+  #   windowManager = {
+  #     i3.enable = true;
+  #   };
+  # };
 
   # Enable tailscale. We manually authenticate when we want with
   # "sudo tailscale up". If you don't use tailscale, you should comment
@@ -121,9 +126,8 @@ in {
   # };
   # Install nerdfont for alacritty.
   fonts.packages = [
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+    pkgs.nerd-fonts.jetbrains-mono
   ];
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -134,6 +138,8 @@ in {
     niv
     rxvt-unicode-unwrapped
     xclip
+    xorg.xrandr
+    libxcvt
 
     # For hypervisors that support auto-resizing, this script forces it.
     # I've noticed not everyone listens to the udev events so this is a hack.
@@ -162,7 +168,7 @@ in {
 
   # Enable flatpak. I don't use any flatpak apps but I do sometimes
   # test them so I keep this enabled.
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   # Disable the firewall since we're in a VM and we want to make it
   # easy to visit stuff in here. We only use NAT networking anyways.

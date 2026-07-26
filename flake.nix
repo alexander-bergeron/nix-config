@@ -5,14 +5,14 @@
     # Pin our primary nixpkgs repository. This is the main nixpkgs repository
     # we'll use for our configurations. Be very careful changing this because
     # it'll impact your entire system.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # We use the unstable nixpkgs repo for some packages.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-26.05";
       # url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -23,7 +23,7 @@
 
     # darwin deps
     darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -40,7 +40,16 @@
 
   outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs: let
     system.configurationRevision = self.rev or self.dirtyRev or null;
-  
+
+    # overlays = [
+    #   (final: prev: {
+    #     unstable = import inputs.nixpkgs-unstable {
+    #       system = final.system;
+    #       config.allowUnfree = true;
+    #     };
+    #   })
+    # ];
+
     # relative paths need to be tracked in git to be discoverable
     mkSystem = import ./lib/mksystem.nix {
       inherit nixpkgs inputs;
@@ -56,8 +65,13 @@
       system = "aarch64-linux";
       user   = "apb";
     };
-    # use with utm (not working currently)
+    # use with utm (qemu-based hypervisor)
     nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" rec {
+      system = "aarch64-linux";
+      user   = "apb";
+    };
+    # use with virtualbox on aarch64 (Apple Silicon)
+    nixosConfigurations.vm-aarch64-vb = mkSystem "vm-aarch64-vb" {
       system = "aarch64-linux";
       user   = "apb";
     };

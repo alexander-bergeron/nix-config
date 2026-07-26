@@ -4,15 +4,23 @@
 
   # We install Nix using a separate installer so we don't want nix-darwin
   # to manage it for us. This tells nix-darwin to just use whatever is running.
-  nix.useDaemon = true;
+  # nix.useDaemon = true;
+  ids.gids.nixbld = 350;
+
+  services.openssh.enable = false;
 
   # Keep in async with vm-shared.nix. (todo: pull this out into a file)
   nix = {
+    # We use the determinate-nix installer which manages Nix for us,
+    # so we don't want nix-darwin to do it.
+    enable = false;
+
     # We need to enable flakes
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      download-buffer-size = 536870912
     '';
 
     # public binary cache that I use for all my derivations. You can keep
@@ -47,36 +55,40 @@
   '';
 
   # Activation script to create aliases for spotlight.
-  system.activationScripts.applications.text = let
-    env = pkgs.buildEnv {
-      name = "system-applications";
-      paths = config.environment.systemPackages;
-      pathsToLink = "/Applications";
-    };
-  in
-    pkgs.lib.mkForce ''
-      # Set up applications.
-      echo "setting up /Applications..." >&2
-      rm -rf /Applications/Nix\ Apps
-      mkdir -p /Applications/Nix\ Apps
-      find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-        while read -r src; do
-          app_name=$(basename "$src")
-          echo "copying $src" >&2
-          ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-        done
-    '';
+  # system.activationScripts.applications.text = let
+  #   env = pkgs.buildEnv {
+  #     name = "system-applications";
+  #     paths = config.environment.systemPackages;
+  #     pathsToLink = "/Applications";
+  #   };
+  # in
+  #   pkgs.lib.mkForce ''
+  #     # Set up applications.
+  #     echo "setting up /Applications..." >&2
+  #     rm -rf /Applications/Nix\ Apps
+  #     mkdir -p /Applications/Nix\ Apps
+  #     find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+  #       while read -r src; do
+  #         app_name=$(basename "$src")
+  #         echo "copying $src" >&2
+  #         ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+  #       done
+  #   '';
 
   # sleep settings
   power.sleep.display = 10;
   power.sleep.computer = 10;
+
+  # Firewall
+  networking.applicationFirewall.enable = true;
+  networking.applicationFirewall.blockAllIncoming = true;
 
   # Turn off startup chime
   system.startup.chime = false;
 
   # Set Apple system settings.
   system.defaults = {
-    alf.globalstate = 1; # Enable Firewall
+    # alf.globalstate = 1; # Enable Firewall
     finder.FXPreferredViewStyle = "clmv";
     loginwindow.GuestEnabled = false;
     NSGlobalDomain.KeyRepeat = 2;
@@ -101,7 +113,7 @@
 
   # Install nerdfont for alacritty.
   fonts.packages = [
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+    pkgs.nerd-fonts.jetbrains-mono
   ];
 
 }
