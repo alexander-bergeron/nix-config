@@ -1,5 +1,50 @@
 # Upgrade lifecycle
 
+## TL;DR — small upgrade
+
+A small upgrade advances the locked commits of `nixpkgs` and `nixpkgs-unstable` to the current tips of the branches already in `flake.nix`: `nixos-26.05` and `nixpkgs-unstable`. The release stays 26.05. A later release is an edit of those URLs.
+
+`nixpkgs` rolls every `pkgs.*` package. `nixpkgs-unstable` rolls `pkgs-unstable.*` (`neovim`, `opencode`). `home-manager` and `nix-darwin` follow `nixpkgs`, so they use the new nixpkgs commit. Their own checkouts, Homebrew taps, and `home.stateVersion` stay.
+
+```text
+preview
+  nix flake update nixpkgs nixpkgs-unstable
+    write /tmp/flake.preview.lock       # flake.lock unchanged
+  nix build system-now                  # current lock
+  nix build system-next                 # --reference-lock-file preview
+  nix store diff-closures now next      # name: old → new
+apply
+  nix flake update nixpkgs nixpkgs-unstable
+    write flake.lock
+  darwin-rebuild switch
+```
+
+Preview. This does not change `flake.lock` or the running system. The diff is Nix packages only. Casks are `brew upgrade --cask --dry-run --greedy`.
+
+```bash
+nix flake update nixpkgs nixpkgs-unstable \
+  --output-lock-file /tmp/flake.preview.lock
+
+cp /tmp/flake.preview.lock ./flake.preview.lock
+
+NIXPKGS_ALLOW_BROKEN=1 nix build --impure --no-write-lock-file \
+  '.#darwinConfigurations.macbook-pro-m1.system' \
+  -o /tmp/system-now
+
+NIXPKGS_ALLOW_BROKEN=1 nix build --impure --no-write-lock-file \
+  --reference-lock-file ./flake.preview.lock \
+  '.#darwinConfigurations.macbook-pro-m1.system' \
+  -o /tmp/system-next
+
+nix store diff-closures /tmp/system-now /tmp/system-next
+```
+
+Apply, after that diff looks right. Then switch with the Darwin command in [Apply the result](#apply-the-result).
+
+```bash
+nix flake update nixpkgs nixpkgs-unstable
+```
+
 This repo is a Nix flake. Desired state lives in the `.nix` files. Exact input revisions live in `flake.lock`. The machine changes only after a rebuild and switch. Editing a file, updating the lock, and switching are three separate steps.
 
 Two package sources are in play:
