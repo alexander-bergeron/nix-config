@@ -1,6 +1,12 @@
+{ config, ... }:
+
 {
   programs.zsh = {
     enable = true;
+
+    # Keep startup files and history in $HOME. Home Manager's default
+    # moves to ${xdg.configHome}/zsh once home.stateVersion is 26.05.
+    dotDir = config.home.homeDirectory;
 
     initContent = ''
       
