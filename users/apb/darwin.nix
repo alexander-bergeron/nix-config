@@ -33,7 +33,13 @@
     ];
 
     casks = [
+      "android-studio"
       # "chromedriver"
+      # "cursor"
+      {
+        name = "cursor";
+        greedy = true;
+      }
       "displaylink"
       "firefox"
       # "ghostty"

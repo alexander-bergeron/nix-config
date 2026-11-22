@@ -70,6 +70,7 @@ in {
     # pkgs.opencode
     pkgs-unstable.opencode
     pkgs.pgadmin4
+    pkgs.pi-coding-agent
     pkgs.podman
     pkgs.podman-compose
     pkgs.protobuf
