@@ -87,6 +87,7 @@ in {
     pkgs.vim
     pkgs.yt-dlp
     pkgs.wireshark
+    pkgs.zig
     # pkgs.zed-editor
     # pkgs-unstable.zed-editor
   ] ++ (lib.optionals isDarwin [
